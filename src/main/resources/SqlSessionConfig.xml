@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--  配置全局配置
+      通过配置这个属性为 true 可以自动将以下画线方式命名的数据库列映射到 Java 对象的驼峰式命名属性中
+      -->
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <!--  配置别名  -->
+    <typeAliases>
+        <package name="com.sxt.domain"/>
+    </typeAliases>
+
+    <!--  注册分页插件  -->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <!--    注入分页插件的属性,分页合理化参数，默认值为false。当该参数设置为 true 时，
+            pageNum<=0 时会查询第一页， pageNum>pages（超过总数时），会查询最后一页。默认false 时，
+            直接根据参数进行查询-->
+            <property name="reasonable" value="true"/>
+        </plugin>
+    </plugins>
+
+
+</configuration>

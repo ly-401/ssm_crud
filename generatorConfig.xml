@@ -1,0 +1,54 @@
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+
+<generatorConfiguration>
+
+    <!--  加载jdbcConfig.properties配置文件  -->
+    <properties resource="jdbcConfig.properties"></properties>
+
+    <context id="testTables" targetRuntime="MyBatis3">
+
+        <!--    是否去除自动生成的注释 true：是，false：否    -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!--    数据库连接的信息：驱动类，连接地址，用户名，密码    -->
+        <jdbcConnection driverClass="${jdbc.driver}" connectionURL="${jdbc.url}"
+                        userId="${jdbc.username}" password="${jdbc.password}"></jdbcConnection>
+
+        <!--    默认为false，把JDBC decimal和numeric类型解析为Integer，为true时，解析为java.math.BigDecimal    -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="true"/>
+        </javaTypeResolver>
+
+        <!--    targetProject：生成PO(实体类)类的位置    -->
+        <javaModelGenerator targetPackage="com.sxt.domain" targetProject=".\src\main\java">
+            <!--      enableSubPackages：是否让schema作为包的后缀      -->
+            <property name="enableSubPackages" value="false"/>
+            <!--      从数据库返回的值被清理前后的空格      -->
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!--    targetPackage：mapper映射文件生成的位置    -->
+        <sqlMapGenerator targetPackage="mapper" targetProject=".\src\main\resources">
+            <!--      enableSubPackages：是否让schema作为包的后缀      -->
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <!--    targetPackage：mapper接口生成的位置    -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.sxt.Dao" targetProject=".\src\main\java">
+            <!--      enableSubPackages：是否让schema作为包的后缀      -->
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+
+        <!--    指定数据库表
+            domainObjectName：可以设置生成的javaBean的名称
+            -->
+        <table tableName="tbl_emp" domainObjectName="Employee"></table>
+        <table tableName="tbl_dept" domainObjectName="Department"></table>
+
+    </context>
+
+</generatorConfiguration>
